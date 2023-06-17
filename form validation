@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Login</title>
+    <style>
+        .error{color: #FF0001;}
+    </style>
+</head>
+<body>
+<main>
+<?php
+ $nameerr=$emailerr=$mobileerr=$gendererr=$websiteerr=$agreeerr="";
+ $name=$email=$mobile=$gender=$website=$agree="";
+ 
+ if($_SERVER["REQUEST_METHOD"]=="POST"){
+    // name validation 
+    if(empty($_POST["name"])){
+        $nameerr = "name is required";
+    }else{
+        $name = input_data($_POST["name"]);  
+        // check if name only contains letters and whitespace  
+        if (!preg_match("/^[a-zA-Z ]*$/",$name)) {  
+            $nameerr = "Only alphabets and white space are allowed";  
+        }
+    }
+//email validation
+ if(empty($_POST["email"])){
+    $emailerr = "Email is required";
 
+ }else {
+    $email = input_data($_POST["email"]);
+    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+        $emailerr = "invalid email format";
+    }
+ }
+//phone no validation
+ if(empty($_POST["mobile"])){
+    $mobileerr = "Mobile no is required";
+ }else{
+    $mobile=input_data($_POST["mobile"]);
+    if(!preg_match("/^[0-9]*$/",$mobile)){
+        $mobileerr = "only numeric value is allowed";    
+    }
+    if(strlen($mobile)!=10){
+        $mobileerr ="mobile no must contain 10 digits";
+    }
+ }
+//website validation
+ if(empty($_POST["website"])){
+    $website = "";
+ }else{
+    $website=input_data($_POST["website"]);
+    if(!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)){
+        $websiteerr = "invalid url";
+    }
+ }
+ //gender validation
+ if(empty($_POST["gender"])){
+    $gendererr = "gender is required ";
+ }else{
+     $gender = input_data($_POST["gender"]);
+ }
+//agree box validation
+ if(empty($_POST["agree"])){
+    $agreeerr="Accept terms of services before submit.";
+ }
+ else {
+    $agree = input_data($_POST["agree"]);
+ }
+ }
+
+
+//function to get input form data and remove unnecessary char
+function input_data($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
+?>
+//creating form which is help to get input by user
+
+<form method = "POST" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+name : <input type="text" name = "name">
+<span class="error">*<?php echo $nameerr;?></span><br>
+email : <input type="text" name = "email">
+<span class="error">*<?php echo $emailerr;?></span><br>
+phone no : <input type="text" name = "mobile">
+<span class="error">*<?php echo $mobileerr;?></span><br>
+website url : <input type="text" name="website">  <br>
+<span class="error"><?php echo $websiteerr; ?> </span> <br>
+Gender:
+<input type="radio" name="gender" value="female">Female
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="other">Other
+<span class="error">*<?php echo $gendererr;?></span><br>
+Agree to Terms of Service:  
+<input type="checkbox" name="agree">  
+<span class="error">* <?php echo $agreeerr; ?> </span><br><br>
+<input type="submit" name = "submit"><br><br>
+<?php
+
+// show all the data what user give as a input 
+echo "your data <br> name : ".$name."<br> email : ".$email."<br> phone no : ".$mobile."<br> website url : ".$website."<br>gender : ".$gender;
+
+?>
+</form>
+
+</main>
+
+
+</body>
+</html>
