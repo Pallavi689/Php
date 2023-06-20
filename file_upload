@@ -1,4 +1,5 @@
-// code how to upload a file and hoe to heandle there errors and chek all the error related condiations 
+// code how to upload a file and how to handle their errors and check all the error-related conditions 
+// note for this code create a new folder (where my php file runs) for upload files collected by the server in this code "upload/" is my file name
 
 <html>
 <body>
@@ -19,18 +20,18 @@ if (isset($_FILES['image'])){
     $f_type = $_FILES['image']['type'];
     $uploadok = 1;
 
-  //if file is not uploaded
+  //if the file is not uploaded
   if(empty($f_name) ){
     echo "please select the file ";
-  }// if file is already exists
+  }// if the file already exists
   elseif(file_exists("upload/".$f_name)){
       echo "Sorry, file already exists.";
       $uploadok = 0;
     }// limit file size
     elseif ($f_size > 5000000) {
-      echo "file is to large";
+      echo "file is too large";
       $uploadok =0;
-    }// chek file type 
+    }//Check the file type 
     elseif ($f_type != 'image/jpg' && $f_type != "image/png" && $f_type != "image/jpeg" && $f_type != "image/gif") {
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadok = 0;
