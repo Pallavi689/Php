@@ -4,7 +4,8 @@
     
         <head></head>
 <body>
-    <form method ="post" action ="save.php">
+    <form method ="post" action ="save.php"> 
+<!--         see save.php file -->
         name : <input type="text" name = "name"><br><br>
         roll number : <input type="text" name = "ro_no"><br><br>
         address : <textarea name="address" id="" cols="30" rows="10"></textarea><br><br>
