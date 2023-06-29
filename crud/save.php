@@ -1,3 +1,4 @@
+// after create_data.php
 <?php
  $s_name = $_POST['name'];
  $s_address = $_POST['address'];
