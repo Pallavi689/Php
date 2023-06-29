@@ -9,4 +9,7 @@
 $data = mysqli_connect("localhost","root","","crud") or die("not connect");
 $sql = "INSERT INTO student(s_name,ro_no,s_address,phone,course) VALUES ('{$s_name}','{$s_rono}','{$s_address}','{$s_phone}','{$s_course}')";
 $result=mysqli_query($data,$sql) or die("query not set");
+
+// redirect the page that following code use note : space bot contain bw location and : = location:
+header("Location: http://localhost/crud/show_table.php");
 ?> 
