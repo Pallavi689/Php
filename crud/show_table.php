@@ -1,3 +1,5 @@
+// using thais code we can show our database table in our html file
+
 <html>
 <body>
     <style>
