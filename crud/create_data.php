@@ -1,4 +1,4 @@
-
+// creating a form which take a user input and save our database 
 <html>
 
     
@@ -15,6 +15,7 @@
         
         <option name="op">select class</option>
         <?php
+        // perform query operation which is save a list of  course in drop down box on a basis of dataset
         $data = mysqli_connect("localhost","root","","crud") or die("not connect");
         $sql = "SELECT DISTINCT course FROM student";
         $result=mysqli_query($data,$sql) or die("query not set");
