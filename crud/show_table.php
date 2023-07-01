@@ -22,23 +22,32 @@ if(mysqli_num_rows($result) > 0){
     <td>roll no.</td>
     <td>address</td>
     <td>phone no.</td>
+    <td>course </td>
+    <td> update </td>
+    <!-- <td>class </td> -->
   </tr>
   <?php
   while($row = mysqli_fetch_assoc($result)){
   ?>
   
   <tr>
-<!--       in a echo pass column name  -->
     <td><?php echo $row['s_id'];?></td>
     <td><?php echo $row['s_name'];?></td>
     <td><?php echo $row['ro_no'];?></td>
-    <td><?php echo $row['address'];?></td>
+    <td><?php echo $row['s_address'];?></td>
     <td><?php echo $row['phone'];?></td>
+    <td><?php echo $row['course'];?></td>
+    
+    <!-- update.php?id= this line is used to pass id(in a url) for update the info of the student by giving student id -->
+    <td><a href="create_data.php"><button >add </button></a>
+      <a href="update.php?id=<?php echo $row['s_id'];?>"><button >edit </button></a> 
+    <a href="delete.php?id=<?php echo $row['s_id'];?>"> <button> delete</button></a></td>
   </tr>
   <?php } ?>
 </table>
 <?php }else{
     echo "no record";
 } ?>
+
 </body>
 </html>
