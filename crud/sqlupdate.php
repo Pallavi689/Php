@@ -1,3 +1,4 @@
+// pass throw the action in update.php form
 <?php 
  $s_idd = $_POST['sid'];
  $s_name = $_POST['name'];
