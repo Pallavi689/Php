@@ -1,4 +1,4 @@
- // include a file ajex_load.php
+ // include a file ajex_load.php and jquery.js
 <!-- After running the program, see the load button and a custom table. when a load button is clicked so you can see a dynamic table  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@
     $(document).ready(function(){
     $("#load-data").on('click',function(e){
       $.ajax({
-        url: "ajex.php",
+        url: "ajax_load.php",
         type : "POST",
         success : function(data){
           $("#table-data").html(data);
