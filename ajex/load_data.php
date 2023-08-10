@@ -1,3 +1,5 @@
+ // include a file ajex_load.php
+<!-- After running the program, see the load button and a custom table. when a load button is clicked so you can see a dynamic table  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,37 +20,25 @@
     <th>id</th>
     <th>name</th>
   </tr>
-  <?php 
-   $cons = mysqli_connect("localhost","root","","ajex");
-   $sql = "SELECT * FROM student";
-   $result = mysqli_query($cons,$sql) or die("not connected");
-   if(mysqli_num_rows($result) > 0){
-    while($row = mysqli_fetch_assoc($result)){
-   
-  ?>
+  
   <tr>
-    <td><?php echo $row['std_id']; ?></td>
-    <td><?php echo $row['first_name']." ". $row['last_name']; ?></td>
-    
+    <td>1</td>
+    <td>row data</td>
   </tr>
-  <?php 
-   }}
-  ?>
 </table>
 <script type = 'text/javascript' src="jquery.js"> </script>
 <!-- show table  -->
 <script type = 'text/javascript'>
     $(document).ready(function(){
-      function load(){
     $("#load-data").on('click',function(e){
       $.ajax({
         url: "ajex.php",
-        type :"POST",
+        type : "POST",
         success : function(data){
           $("#table-data").html(data);
         }
       });
-    });}
+    });
     
     });
 </script>
