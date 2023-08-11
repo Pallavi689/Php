@@ -14,11 +14,15 @@
 </head>
 <body>
   <!-- show table  -->
+  <form id ="inputdata">
    <input type="text" id ="fname">
    <br><br>
    <input type="text" id = "lname">
    <br><br>
     <button id="submit">submit</button><br><br>
+    </form>
+    <table id ="table-data">
+        
     <table id ="table-data">
   <tr>
     <th>id</th>
@@ -62,6 +66,9 @@
        e.preventDefault(); // stop the submit preporty
        var fname = $("#fname").val();
        var lname = $("#lname").val();
+         if(fname == "" || lname == ""){
+        alert("all field are required");
+       }else{
        $.ajax({
         url : "insert_ajex.php",
         type : "POST",
@@ -75,6 +82,9 @@
           }
         }
        });
+             // reset form after submitting
+              $("#inputdata").trigger("reset");
+    }
     });
     
     });
