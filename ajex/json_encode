@@ -1,0 +1,48 @@
+//json encode fatch data by the database and data return in a json file  
+
+//main.php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="load"></p>
+    <script type = 'text/javascript' src="jquery.js"> </script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"data.php",
+                type:"POST",
+                // pass id of data
+                data: {id : 16},
+                dataType : "JSON",
+                success:function(data){
+                    // $("#load").append(data.body);
+                    $.each(data,function(key,value){
+                        $("#load").append(value.std_id + " " + value.first_name + " "+value.last_name +"<br>"); 
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+//post.ph
+
+
+<?php
+ $data = mysqli_connect("localhost","root","","ajex");
+//  when you are not pass any id by data var in main file
+//  $sql="SELECT * FROM student";  
+ $sql="SELECT * FROM student WHERE std_id = {$_POST['id']}";
+ $result = mysqli_query($data,$sql) or die("not");
+ $row = mysqli_fetch_all($result , MYSQLI_ASSOC);
+ echo json_encode($row);
+
+?>
