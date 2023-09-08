@@ -1,0 +1,65 @@
+//fetch the data in mysql and create a dynamic json file and save the data in a dinamic
+
+
+// $data = mysqli_connect("localhost","root","","ajex");
+// $sql="SELECT * FROM student";
+// $result = mysqli_query($data,$sql) or die("not"); 
+// $row = mysqli_fetch_all($result , MYSQLI_ASSOC);
+// $json_obj =  json_encode($row,JSON_PRETTY_PRINT);
+// $fname = "my-".date("d-m-y").".json";
+// if(file_put_contents("jsonf/{$fname}",$json_obj)){
+//    echo $fname." file created";
+// }else{
+//     echo "not created";
+// }
+
+
+//index.php
+//create form and save form data in a json file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p id="load"></p> -->
+    <form action="data.php" method ="POST">
+        <input type="text" name ="fname"><br>
+        <input type="text" name ="lname"><br>
+        <input type="submit" name = "submit">
+    </form>
+   
+</body>
+</html>
+
+//data.php
+//create json file for data save
+
+<?php
+if($_POST['fname'] != "" && $_POST['lname'] != ""){
+    if(file_exists('jsonf/my.JSON')){
+       $current_data = file_get_contents('jsonf/my.JSON');
+       $data = json_decode($current_data,true);
+       $new_data = array(
+        'first_name' => $_POST['fname'],
+        'last_name' => $_POST['lname']
+
+       );
+
+    $data[]= $new_data;
+    $json_obj =  json_encode($data,JSON_PRETTY_PRINT);
+    if(file_put_contents("jsonf/my.JSON",$json_obj)){
+        echo "saved data";
+    }else{
+        echo "unsaved data";
+    }
+
+
+    }else{
+        echo " file not exist";
+   }
+}
+
+?>
